@@ -1,0 +1,10 @@
+<% @parking.each do |parking| %>
+  <div>
+    <%= image_tag parking.get_image %>
+    <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+    <p>スポット名：<%= parking.spot_name %></p>
+    <p>住所：<%= parking.address %></p>
+    <p>どんな駐車場？：<%= parking.caption %></p>
+    <p>アカウント名：<%= parking.user.name %></p>
+  </div>
+<% end %>
