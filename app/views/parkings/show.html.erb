@@ -1,2 +1,25 @@
-<h1>Parkings#show</h1>
-<p>Find me in app/views/parkings/show.html.erb</p>
+<div>
+  <%= image_tag @parking.get_image %>
+  <p>スポット名:<%= @parking.spot_name %></p>
+  <p>住所：<%= @parking.address %></p>
+  <p>どんな駐車場？：<%= @parking.caption %></p>
+  <p>ユーザー：<%= image_tag @parking.user.get_profile_image(100,100) %></p>
+  <p><%= @parking.user.name %></p>
+  <p>投稿日：<%= @parking.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @parking.user == current_user %>
+    <%= link_to "削除", parking_path(@parking), method: :delete %>
+  <% end %>
+    <% if @parking.favorited_by?(current_user) %>
+    <p>
+      <%= link_to parking_favorite_path(@parking), method: :delete do %>
+        ♥<%= @parking.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to parking_favorite_path(@parking), method: :post do %>
+        ♡<%= @parking.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+</div>
