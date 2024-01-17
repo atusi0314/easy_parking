@@ -1,20 +1,46 @@
-<h1>画像投稿フォーム</h1>
-<% if @parking.errors.any? %>
-  <%= @parking.errors.count %>件のエラーが発生しました
-  <ul>
-    <% @parking.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class = "pt-5 mx-auto">
+  <h1 class = "font-bold pl-5 pt-5">New パーキング</h1>
+  <% if @parking.errors.any? %>
+    <%= @parking.errors.count %>件のエラーが発生しました
+    <ul>
+      <% @parking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class = "px-5 pt-3">
+    <%= form_with model: @parking do |f| %>
+      <div class = "mb-1">
+        <div class = "pt-5 pb-1">
+          <label for = "spot_name">スポット名</label>
+        </div>
+          <%= f.text_field :spot_name, class: "form-control w-50", id: "spot_name" %>
+      </div>
+      <div class = "mb-1">
+        <div class = "pt-5 pb-1">
+          <label for = "address">住所</label>
+        </div>
+          <%= f.text_field :address, class: "form-control w-50", id: "address" %>
+      </div>
+      <div class = "mb-1">
+        <div class = "pt-5 pb-1">
+          <label for = "caption">どんな駐車場？</label>
+        </div>
+          <%= f.text_area :caption, class: "form-control w-50", id: "caption" %>
+      </div>
+      <div class = "mb-1">
+        <div class = "pt-5 pb-1">
+          <label for = "image">写真</label>
+        </div>
+        <div class = "btn">
+           <%= f.file_field :image, accept: "image/*", id: "image"%>
+        </div>
+      </div>
+      <div class = "pb-5 justify-center align-center">
+        <div class = "pt-5">
+          <%= f.submit '     投稿    ', class: "btn btn-primary" %>
+        </div>
+      </div>
     <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @parking do |f| %>
-  <h4>スポット名</h4>
-  <%= f.text_field :spot_name %>
-  <h4>住所</h4>
-  <%= f.text_field :address %>
-  <h4>どんな駐車場？</h4>
-  <%= f.text_area :caption %>
-  <h4>写真</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <%= f.submit '投稿' %>
-<% end %>
+  </div>
+</div>
