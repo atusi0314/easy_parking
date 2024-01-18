@@ -1,24 +1,22 @@
-   <div class="card-list-container py-5">
+   <div class="card-list-container w-50 py-5 mx-auto">
       <% @parking.each do |parking| %>
       <div class="card w-75 mx-auto mt-4 shadow-lg">
         <%= link_to parking_path(parking.id) do %>
-          
         <% end %>
         <div class="card-body">
-          <div class="row">
-            <div class="col-3">
+          <div class="row mx-auto">
+            <div class="col-lg-4 col-sm-12 mx-auto text-center">
               <%= image_tag parking.user.get_profile_image(100,100), class: "mt-3 rounded-circle"; %>
               <p><i class="fas fa-user"><%= parking.user.name %></i><p>
             </div>
-            <div class="col-9">
+            <div class="col-lg-7 col-sm-12">
               <p class="card-title">
                  <%= link_to(parking_path(parking.id), class: "text-dark") do %>
                   <strong><i class="far fa-flag"></i><span><%= parking.spot_name %></span></strong></br>
                   <%= parking.address %>
                 <% end %>
               </p>
-              <p class="card-text">どんな駐車場？</br><%= parking.caption %></p>
-              
+              <p class="card-text"><strong>どんな駐車場？</strong></br><%= parking.caption %></p>
             </div>
           </div>
         </div>

@@ -1,24 +1,64 @@
-<div class = "container mx-auto pt-5 px-5 flex justify-center aligun-center">
-  <p class = "mx-auto"><strong><i class="far fa-flag"></i><span><%= @parking.spot_name %></span></strong></p>
-  <p>住所：<%= @parking.address %></p>
-  <p>どんな駐車場？：<%= @parking.caption %></p>
-  <p>ユーザー：<%= image_tag @parking.user.get_profile_image(100,100) %></p>
-  <p><%= @parking.user.name %></p>
-  <p>投稿日：<%= @parking.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @parking.user == current_user %>
-    <%= link_to "削除", parking_path(@parking), method: :delete %>
-  <% end %>
-    <% if @parking.favorited_by?(current_user) %>
-    <p>
-      <%= link_to parking_favorite_path(@parking), method: :delete do %>
-        ♥<%= @parking.favorites.count %> いいね
+<div class = "container w-50 mx-auto pt-5 px-5 flex justify-center aligun-center">
+  <div class = "row-sm-6 pt-5 pb-2">
+    <div class = "flex inline-flex hover:underline">
+      <%= link_to parkings_path do %>
+        <p class = "mr-2">⬅️<span>戻る</span></p>
       <% end %>
-    </p>
-    <% else %>
-    <p>
-      <%= link_to parking_favorite_path(@parking), method: :post do %>
-        ♡<%= @parking.favorites.count %> いいね
+    </div>
+  </div>
+  <div class = "row border-bottom border-dark flex justify-center aligun-center">
+    <div class = "col-sm-6">
+      <p class = "pl-2 mx-auto"><strong><i class="far fa-flag mr-2"></i><span><%= @parking.spot_name %></span></strong>
+    </div>
+    <div class = "col-sm-6 text-right">
+      <% if @parking.favorited_by?(current_user) %>
+        <p>
+          <%= link_to parking_favorite_path(@parking), method: :delete do %>
+            ♥️<%= @parking.favorites.count %>
+          <% end %>
+        </p>
+      <% else %>
+        <p>
+          <%= link_to parking_favorite_path(@parking), method: :post do %>
+            ♡<%= @parking.favorites.count %>
+          <% end %>
+        </p>
       <% end %>
-    </p>
-  <% end %>
+    </div>
+  </div>
+  <div class = "row border-bottom border-dark mt-2">
+    <div class = "col-12">
+      <p><strong>住所</strong></p>
+      <p></p><%= @parking.address %></p>
+    </div>
+  </div>
+  <div class = "row border-bottom border-dark mt-2">
+    <div class = "col-12">
+      <p><strong>どんな駐車場？</strong></p>
+      <p></p><%= @parking.caption %></p>
+    </div>
+  </div>
+  <div class = "row border-bottom border-dark mt-2">
+    <div class = "col-12">
+      <p><strong>投稿画像</strong></p>
+      <div class = "img-container text-center">
+        <p><%= image_tag @parking.get_parking_image(300, 300) %></p>
+      </div>
+    </div>
+  </div>
+  <div class = "row pb-5">
+    <div class = "col-12">
+      <p><strong>投稿日</strong>：<%= @parking.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+  </div>
+  <div class = "row pb-5">
+    <div class = "col-12">
+      <div class = "text-center d-grid gap-2 d-md-block">
+        <% if @parking.user == current_user %>
+          <%= link_to "  削除  ", parking_path(@parking), method: :delete, class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
 </div>

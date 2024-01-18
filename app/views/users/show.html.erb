@@ -1,7 +1,6 @@
 <!-- ユーザー詳細 -->
 <div class = "container mx-auto pt-5 flex justify-center aligun-center">
-  <div class = "row-12 pl-5 mx-auto pt-5 flex justify-center aligun-center">
-    <div class="row mx-auto">
+  <div class="row mx-auto pl-5 mx-auto pt-5 flex justify-center aligun-center border-bottom border-dark">
         <div class="col-5">
               <%= image_tag @user.get_profile_image(100,100), class: "d-block float-right mt-3  rounded-circle img-fluid"; %>
         </div>
@@ -16,23 +15,21 @@
 
 <!-- ユーザー投稿一覧 -->
 
-   <div class="card-list-container py-5">
+   <div class="card-list-container w-75 mx-auto py-5">
       <% @parking.each do |parking| %>
-      <div class="card w-50 mx-auto mt-4 shadow-lg">
-        <%= link_to parking_path(parking.id) do %>
-
-        <% end %>
-        <div class="card-body">
-          <div class="mx-auto pl-5">
-              <p class="card-title">
-                 <%= link_to(parking_path(parking.id), class: "text-dark") do %>
-                  <strong><i class="far fa-flag"></i><span><%= parking.spot_name %></span></strong></br>
-                  <%= parking.address %>
-                <% end %>
-              </p>
-              <p class="card-text">どんな駐車場？</br><%= parking.caption %></p>
-          </div>
+        <div class="card w-50 mx-auto mt-4 shadow-lg">
+          <%= link_to parking_path(parking.id) do %>
+  
+          <% end %>
+          <div class="card-body col-8 mx-auto">
+                <p class="card-title">
+                   <%= link_to(parking_path(parking.id), class: "text-dark") do %>
+                    <strong><i class="far fa-flag"></i><span><%= parking.spot_name %></span></strong></br>
+                    <%= parking.address %>
+                  <% end %>
+                </p>
+                <p class="card-text"><strong>どんな駐車場？</strong></br><%= parking.caption %></p>
+            </div>
         </div>
-      </div>
       <% end %>
     </div>
