@@ -2,8 +2,9 @@ class Parking < ApplicationRecord
   has_one_attached :parking_image
   belongs_to :user
   has_many :favorites, dependent: :destroy
-
   validates :spot_name, presence: true
+  geocoded_by :address
+  after_validation :geocode
 
   
   def get_parking_image(width, height)

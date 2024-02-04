@@ -7,80 +7,93 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <script src="https://kit.fontawesome.com/60b0039113.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
   </head>
 
-  <body class = "d-flex-column vh-100">
-    <header class="shadow-sm bg-danger">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-          <a class="navbar-brand p-3" href="/"><%= image_tag ('Easy parking.png') %></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '検索', parkings_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿フォーム', new_parking_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-            </li>
-            <% end %>
-            </ul>
-          </div>
-        </div>
+  <body class = "d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class = "navbar">
+            <a class = "navbar-brand p-3 ml-5" href = "/"><%= image_tag ('Easy parking.png') %></a>
+              <ul class="navbar-nav ml-auto list-group-horizontal">
+                <% if user_signed_in? %>
+                  <li class="nav-item">
+                    <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-dark'  do %>
+                      <i class="fa-solid fa-right-from-bracket fa-3x"></i><p>ログアウト</p>
+                    <% end %>
+                  </li>
+                <% else %>
+                  <li class="nav-item mr-5">
+                    <%= link_to new_user_registration_path, class: 'text-dark' do %>
+                    <i class="fa-solid fa-address-card fa-3x text-center"></i><p calss = "text-center">新規登録</p>
+                    <% end %>
+                  </li>
+                  <li class="nav-item mx-5">
+                    <%= link_to  new_user_session_path, class: 'text-dark'  do %>
+                     <i class="fa-solid fa-right-to-bracket fa-3x text-center"></i><p calss = "text-center">ログイン</p>
+                    <% end %>
+                  </li>
+                <% end %>
+              </ul>
       </nav>
     </header>
-    <main class="mb-auto bg-warning">
+  <main class="mb-auto">
+    <div class = "message">
+      <%= flash[:notice] %>
+    </div>
     <%= yield %>
-    </main>
-    <footer class="bg-danger text-white pt-5 pb-4">
-      <div class="container">
-        <div class="row no-gutters">
-          <div class="col-md-4">
-           <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '検索', parkings_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to '投稿フォーム', new_parking_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to 'マイページ', user_path(current_user.id), class: 'nav-link text-dark' %>
-            </li>
-            <% else %>
-            <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path, class: 'nav-link text-dark' %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path, class: 'nav-link text-dark' %>
-            </li>
-            <% end %>
-            </ul>
-          </div>
-        </div>
+  </main>
+    <footer class="pt-3 fixed-bottom">
+          <nav class="">
+            <div class = "container w-50">
+              <ul class="navbar-nav", style="flex-direction: row;">
+              <% if user_signed_in? %>
+                <li class="col-3 text-center">
+                  <%= link_to  root_path, class: 'text-dark'  do %>
+                    <i class="fa-solid fa-house fa-2x text-center"></i><p calss = "text-center">ホーム</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to  parkings_path, class: 'text-dark'  do %>
+                   <i class="fa-solid fa-magnifying-glass fa-2x text-center"></i><p calss = "text-center">検索</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to  user_path(current_user.id), class: 'text-dark'  do %>
+                   <i class="fa-solid fa-user fa-2x text-center"></i><p calss = "text-center">マイページ</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to   new_parking_path, class: 'text-dark'  do %>
+                   <i class="fa-solid fa-plus fa-2x text-center"></i><p calss = "text-center">投稿</p>
+                  <% end %>
+                </li>
+              <% else %>
+                <li class="col-3 text-center">
+                  <%= link_to  root_path, class: 'text-dark'  do %>
+                    <i class="fa-solid fa-house fa-3x text-center"></i><p calss = "text-center">ホーム</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to  new_user_session_path, class: 'text-dark'  do %>
+                   <i class="fa-solid fa-magnifying-glass-plus fa-3x text-center"></i><p calss = "text-center">検索</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to  new_user_session_path, class: 'text-dark'  do %>
+                   <i class="fa-solid fa-user fa-3x text-center"></i><p calss = "text-center">マイページ</p>
+                  <% end %>
+                </li>
+                <li class="col-3 text-center">
+                  <%= link_to  new_user_session_path, class: 'text-dark'  do %>
+                   <i class="fa-solid fa-plus fa-3x text-center"></i><p calss = "text-center">投稿</p>
+                  <% end %>
+                </li>
+              <% end %>
+              </ul>
+            </div>
+          </nav>
       </div>
     </footer>
   </body>
