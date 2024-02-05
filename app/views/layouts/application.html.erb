@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <script src="https://kit.fontawesome.com/60b0039113.js" crossorigin="anonymous"></script>
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all'%>
+    <%= javascript_pack_tag 'application' %>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
   </head>
 
   <body class = "d-flex flex-column vh-100">
     <header class="shadow-sm">
       <nav class = "navbar">
-            <a class = "navbar-brand p-3 ml-5" href = "/"><%= image_tag ('Easy parking.png') %></a>
+            <a class = "navbar-brand p-3 ml-5" href = "/"><%= image_tag asset_path('Easy parking.png') %></a>
               <ul class="navbar-nav ml-auto list-group-horizontal">
                 <% if user_signed_in? %>
                   <li class="nav-item">
