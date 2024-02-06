@@ -1,1 +1,14 @@
 @use '~bootstrap/scss/bootstrap';
+
+main {
+  background-color: white;
+  padding-bottom: 150px;
+}
+
+header, footer {
+  background-color: #FFCC99;
+}
+
+.message {
+  background-color: #99FFFF;
+}
