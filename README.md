@@ -36,4 +36,3 @@
 - JSライブラリ：jQuery
 - IDE：Cloud9
 ​
-https://docs.google.com/spreadsheets/d/1RzU5Qc4NthNHOFtZ5oze3oJ94rOgFB9pQkXVZLRi9Gk/edit#gid=1091086188
