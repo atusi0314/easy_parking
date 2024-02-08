@@ -17,7 +17,7 @@ class ParkingsController < ApplicationController
 
   def index
     @parking = Parking.page(params[:page])
-    @map = Parking.pluck(:user_id, :address, :latitude, :logitude)
+    @map = Parking.pluck(:user_id, :address, :latitude, :longitude)
   end
 
   def show
@@ -38,7 +38,7 @@ class ParkingsController < ApplicationController
   private
 
   def parking_params
-    params.require(:parking).permit(:spot_name, :address, :image, :caption, :latitude, :logitude)
+    params.require(:parking).permit(:spot_name, :address, :image, :caption, :latitude, :longitude)
   end
 
 end
